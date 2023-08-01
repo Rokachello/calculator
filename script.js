@@ -1,25 +1,60 @@
 
 
-let firstnumber = 0
-let operator = null
-let secondnumber = null
-let screenNumber = ""
+let firstNumber = ""
+let operator = ""
+let secondNumber = ""
+let contentOnScreen = firstNumber + operator + secondNumber
+let calc = firstNumber + " " + operator + " " + secondNumber + "xx"
 
 
-// add click listeners
+// add click listeners for numbers
 let numbers = document.querySelectorAll(".num");
 console.log(numbers);
 numbers.forEach((number) => {
   number.addEventListener('click', () => {
-    const numberToAdd = number.textContent// This will be executed when mouseover event occurs
+    const choosenDigit = number.textContent
+    if(operator === ""){
+        firstNumber = firstNumber + choosenDigit
+        console.log("firstNumber" + firstNumber)
+    } else {
+        secondNumber = secondNumber + choosenDigit
+        console.log("xx" + contentOnScreen)
+    }
+    console.log(firstNumber + " " + operator + " " + secondNumber)
+    updateContentOnScreen() 
    
-    screenNumber = screenNumber + numberToAdd
-    document.querySelector(".content").textContent = screenNumber
 });
 });
 
+// add click listeners for operators
+let operations = document.querySelectorAll(".operation");
+operations.forEach((operation) => {
+    operation.addEventListener('click', () => {
+    const choosenOperation = operation.textContent
+    operator = choosenOperation
+    updateContentOnScreen() 
+    
+});
+});
+
+let calculate = document.querySelector(`.big-button`)
+calculate.addEventListener(`click`, () => {
+   const result = operate(firstNumber,operator,secondNumber)
+    firstNumber = result
+    operator = ""
+    secondNumber = ""
+    updateContentOnScreen() 
+}
+)
 
 
+
+
+function updateContentOnScreen() {
+    contentOnScreen = firstNumber + operator + secondNumber;
+    document.querySelector(".content").textContent = contentOnScreen;
+   document.querySelector(".calculation").textContent = calc
+  }
 
 function operate(a,operator,b){
 let result = null
@@ -28,13 +63,13 @@ let result = null
         case '+':
             result = add(a,b)
         break;
-        case '-':
+        case '−':
             result = subtract(a,b)
         break;
-        case '*':
+        case 'x':
             result = multiply(a,b)
         break;
-        case '/':
+        case '÷':
             result = divide(a,b)
         break;
         default:
@@ -47,6 +82,8 @@ let result = null
 
 
 function add(a,b){
+    a = Number(a)
+    b = Number(b)
     return a + b
 }
 
