@@ -3,6 +3,17 @@
 let firstnumber = 0
 let operator = null
 let secondnumber = null
+let screenNumber = null
+
+// add click listeners
+var numbers = document.querySelectorAll(".num");
+
+numbers.forEach((number) => {
+  number.addEventListener('click', () => {
+    const numberToAdd = number.textContent// This will be executed when mouseover event occurs
+    console.log(numberToAdd)
+});
+});
 
 function operate(a,operator,b){
 let result = null

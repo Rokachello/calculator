@@ -73,10 +73,6 @@
     font-size: 50px;
   }
 
-  .operation{
-    background-color: black;
-  }
-
   .big-button{
     border: 1px solid black;
     flex: 2 1 ;
