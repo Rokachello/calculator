@@ -3,8 +3,8 @@
 let firstNumber = ""
 let operator = ""
 let secondNumber = ""
-let contentOnScreen = firstNumber + operator + secondNumber
-let calc = firstNumber + " " + operator + " " + secondNumber + "xx"
+let contentOnScreen = ""
+let calc = " "
 
 
 // add click listeners for numbers
@@ -18,9 +18,9 @@ numbers.forEach((number) => {
         console.log("firstNumber" + firstNumber)
     } else {
         secondNumber = secondNumber + choosenDigit
-        console.log("xx" + contentOnScreen)
+       
     }
-    console.log(firstNumber + " " + operator + " " + secondNumber)
+    console.log(firstNumber + " " + operator + " " + secondNumber + " = " + "")
     updateContentOnScreen() 
    
 });
@@ -40,20 +40,35 @@ operations.forEach((operation) => {
 let calculate = document.querySelector(`.big-button`)
 calculate.addEventListener(`click`, () => {
    const result = operate(firstNumber,operator,secondNumber)
+    let first = firstNumber
+    let second = secondNumber
+    let op = operator
     firstNumber = result
     operator = ""
     secondNumber = ""
     updateContentOnScreen() 
+    
+    calc = first +" "+ op +" "+ second + " = " + contentOnScreen;
+   document.querySelector(".calculation").textContent = calc
 }
 )
 
+let clear = document.querySelector(`.clear`)
+clear.addEventListener(`click`, () => 
+        clearContentOnScreen() 
+)
 
-
+function clearContentOnScreen()  {
+    console.log("clear")
+    contentOnScreen = 0
+    firstNumber = 0
+    document.querySelector(".content").textContent = contentOnScreen;
+}
 
 function updateContentOnScreen() {
-    contentOnScreen = firstNumber + operator + secondNumber;
+  
+    contentOnScreen = firstNumber + operator + secondNumber; 
     document.querySelector(".content").textContent = contentOnScreen;
-   document.querySelector(".calculation").textContent = calc
   }
 
 function operate(a,operator,b){
@@ -99,16 +114,3 @@ function divide(a,b){
     return a / b
 }
 
-
-let plus = add(3, 4)
-let minus = subtract(5, 2)
-let mult = multiply(3, 7)
-let divi = divide(15,4)
-let test1 = operate(4,"+",8)
-let test2 = operate(4,"-",8)
-let test3 = operate(4,"*",8)
-let test4 = operate(4,"/",8)
-let test5 = operate(4,"x",5)
-
-console.log(plus, minus, mult, divi)
-console.log(test1, test2, test3,test4, test5)
