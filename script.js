@@ -20,7 +20,7 @@ numbers.forEach((number) => {
         secondNumber = secondNumber + choosenDigit
        
     }
-    console.log(firstNumber + " " + operator + " " + secondNumber + " = " + "")
+
     updateContentOnScreen() 
    
 });
@@ -29,13 +29,31 @@ numbers.forEach((number) => {
 // add click listeners for operators
 let operations = document.querySelectorAll(".operation");
 operations.forEach((operation) => {
+
     operation.addEventListener('click', () => {
+        if(operator===""){
+            console.log("no operator")
     const choosenOperation = operation.textContent
     operator = choosenOperation
+    updateContentOnScreen()
+} else {
+    console.log("yes operator")
+    const result = operate(firstNumber,operator,secondNumber)
+    let first = firstNumber
+    let second = secondNumber
+    let op = operator
+    firstNumber = result
+    operator = operation.textContent 
+    secondNumber = ""
     updateContentOnScreen() 
     
+    calc = first +" "+ op +" "+ second + " = " + contentOnScreen;
+   document.querySelector(".calculation").textContent = calc
+} 
+  
 });
 });
+
 
 let calculate = document.querySelector(`.big-button`)
 calculate.addEventListener(`click`, () => {
@@ -61,15 +79,16 @@ clear.addEventListener(`click`, () =>
 function clearContentOnScreen()  {
     console.log("clear")
     contentOnScreen = 0
-    firstNumber = 0
+    firstNumber = ""
     document.querySelector(".content").textContent = contentOnScreen;
 }
 
 function updateContentOnScreen() {
-  
+    
     contentOnScreen = firstNumber + operator + secondNumber; 
     document.querySelector(".content").textContent = contentOnScreen;
   }
+
 
 function operate(a,operator,b){
 let result = null
